@@ -1,0 +1,98 @@
+#summary Documentation for isometricController.class.php
+#labels Phase-Design
+= isometricController.class.php =
+== Basic information ==
+|| *Class Name* || isometricController ||
+|| *File Name* || isometricControler.class.php ||
+|| *First Released* || 2nd January 2007 ||
+|| *Description* || isometricController is the basic controller for all isometric engine activity, the controller does all the rendering, sprite loading and anything involving the isometric side of the engine. ||
+|| *Completed* || 37% ||
+
+== Class Demo ==
+{{{
+<?php
+// THIS IS AN OLD DEMO, AND NEEDS TO BE REWROTE. WILL NOT WORK WITH CURRENT REVISION \\
+include "classes/Sprite.class.php";
+include "classes/isometricController.class.php";
+$isometricController = new IsometricController;
+$background = $isometricController->loadSprite("sprites/bg.gif");
+$size = 9;
+for($x=-1;$x<$size;$x++) for($y=-1;$y<$size*2;$y++) $background = $isometricController->copySprite($background, $x, $y);
+$train = $isometricController->loadSprite("sprites/train.gif");
+$isometricController->sprite[$train]->x = 3;
+$isometricController->sprite[$train]->y = 3;
+$isometricController->sprite[$train]->z = 0;
+$isometricController->render(true);
+?>
+}}}
+
+== Class documentation ==
+*Functions defined in this class:*
+|| loadSpriteFromImage($spriteImage, _$x_, _$y_, _$z_, _$returnObject_); || Loads a [Sprite] from an image ||
+|| loadSpriteFromCollection($spriteCollection); || Loads a [Sprite] from a [spriteCollection] ||
+|| loadSpriteFromGroup($spriteName, $spriteGroup); || Loads a [Sprite] from a [spriteGroup] ||
+|| loadSpriteFromObject($spriteObject); || Loads a [Sprite] from a [Sprite] object ||
+|| loadSpriteFromSprite($spriteId, _$x_, _$y_, _$z_); || Loads a [Sprite] from another [Sprite] ID ||
+|| renderImage(_$displayCoords_, _$fileName_); || Renders the entire isometric image ||
+|| detectCollision(); || Detects for collisions between sprites.
+|| || ||
+|| *Reserved* || The following are internal functions ||
+|| none || none ||
+
+==== loadSpriteFromImage($spriteImage, $x, $y, $z, $returnObject) ====
+This function loads a [Sprite] from an image file
+|| $spriteImage _(string)_ || The path of the image you wish to load. ||
+|| _$x_ _(int)_ || The X position to load the sprite at. ||
+|| _$y_ _(int)_ || The Y position to load the sprite at. ||
+|| _$z_ _(int)_ || The Z position to load the sprite at. ||
+|| _$returnObject_ _(bool)_ || Should the Sprite object be returned (or the sprite ID) ||
+
+==== loadSpriteFromCollection($spriteCollection) ====
+This function loads a [Sprite] from a [spriteCollection]
+|| $spriteCollection || a [spriteCollection] object ||
+
+==== loadSpriteFromGroup($spriteName, $spriteGroup) ====
+This function loads a [Sprite] from a [spriteGroup].
+|| $spriteName _(string)_ || The name of the sprite to load ||
+|| $spriteGroup _(object)_ || The group of sprites to load it from ||
+
+==== loadSpriteFromObject($originalSprite) ====
+This function copies a [Sprite] and creates a new one based on it.
+|| $originalSprite _(object)_ || The original sprite object. ||
+
+==== loadSpriteFromSprite($originalSprite, $x, $y, $z) ====
+This function copies a [Sprite] and creates a new one based on it.
+|| $originalSprite _(int)_ || The index of the original sprite. ||
+|| _$x_ _(int)_ || The X position to load the sprite at. ||
+|| _$y_ _(int)_ || The Y position to load the sprite at. ||
+|| _$z_ _(int)_ || The Z position to load the sprite at. ||
+
+==== renderImage($displayCoords, $fileName) ====
+This function renders the entire isometric image.
+|| _$displayCoords_ _(int)_ || Display the coords printed on the final image. ||
+|| || -2 = no coords ||
+|| || -1 = all coords ||
+|| || 0+ = coords for that Z height ||
+|| _$fileName_ _(string)_ || Filename of the output file ||
+
+==== detectCollision() ====
+This function detects for collisions between multiple sprites on a single tile, returns all the colliding sprites locations.
+
+{{{
+
+
+
+
+
+
+
+}}}
+*Variables defined in this class:*
+|| blockWidth _(int)_ || This is the width (x) of the tiles/blocks (in pixels). ||
+|| blockHeight _(int)_ || This is the height/2 (y) of the tiles/blocks (in pixels). ||
+|| blockDepth _(int)_ || This is the depth (z) of the tiles/blocks (in pixels). ||
+|| sprite _(mixed)_ || The list of loaded sprites. ||
+|| || ||
+|| *Reserved* || The following are internal variables ||
+|| outputImage _(mixed)_ || An internal var used to store the output image. ||
+|| loadedID _(array)_ || An internal var used to store all the loaded IDs. ||
