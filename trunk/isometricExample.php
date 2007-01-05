@@ -39,9 +39,10 @@ $backgroundSprite = $isometricController->loadSpriteFromImage("sprites/bg.gif", 
  * The 'null' means it doesn't have a x,y,z co-ord,
  * The 'true' means just return the Sprite object without adding to final image.
  **/
-$slopeLeft = $isometricController->loadSpriteFromImage("sprites/slope.gif", null, null, null, true);
-$slopeGroup = new spriteGroup;
-$slopeGroup->addSprite($slopeLeft, "left");
+//$slopeLeft = $isometricController->loadSpriteFromImage("sprites/slope.gif", null, null, null, true);
+$slopeGroup = $isometricController->loadSpritesFromTiles("sprites/slope.gif", array("left", "right"), new spriteGroup);
+//$slopeGroup = new spriteGroup;
+//$slopeGroup->addSprite($slopeLeft, "left");
 
 /**
  * Setup the heightMap
