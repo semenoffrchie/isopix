@@ -109,7 +109,7 @@ class isometricController {
 		return count($this->sprite) - 1;
 	}
 	/**
-	 * loadSpriteFromSprite($originalSprite, $x, $y)
+	 * loadSpriteFromSprite($originalSprite, $x, $y, $z)
 	 **
 	 * $originalSprite: The index of the original sprite.
 	 * $x:              Preload with X coord.
@@ -127,6 +127,39 @@ class isometricController {
 		$this->sprite[] = $newSprite;
 		return count($this->sprite) - 1;
 	}
+	/**
+	 * loadSpritesFromTiles($spriteTiles, $spriteNames, $spriteGroup)
+	 **
+	 * $spriteTiles: The name of the .gif containing the tiles.
+	 * $spriteNames: The names of the sprites.
+	 * $spriteGroup: The group that should be returned.
+	 **/
+	function loadSpritesFromTiles($spriteTiles, $spriteNames, $spriteGroup) {
+		$tileImage = imagecreatefromgif($spriteTiles);
+		$imageWidth = imagesx($tileImage);
+		$imageHeight = imagesy($tileImage);
+		$chunkSize = round($imageWidth / count($spriteNames));
+		$chunkImages = array();
+		for ($currentChunk=1;$currentChunk<count($spriteNames);$currentChunk++) {
+			$chunkImages[$currentChunk - 1] = imagecreate($chunkSize, $imageHeight);
+			$col = imagecolorallocate($chunkImages[$currentChunk - 1], 255,255,255);
+			imagecolortransparent($chunkImages[$currentChunk - 1], $col);
+			imagecopyresampled($chunkImages[$currentChunk - 1], $tileImage, 1, 1, $chunkSize * ($currentChunk - 1) + 1, 1, $chunkSize, $imageHeight, $chunkSize, $imageHeight);
+		}
+		$chunkImages[count($spriteNames) - 1] = imagecreate($chunkSize, $imageHeight);
+		$col = imagecolorallocate($chunkImages[count($spriteNames) - 1], 0,0,0);
+		imagecolortransparent($chunkImages[count($spriteNames) - 1], $col);
+		imagecopyresampled($chunkImages[count($spriteNames) - 1], $tileImage, 1, 1, $chunkSize * (count($spriteNames)- 1) + 1, 1, $imageWidth, $imageHeight, $imageWidth, $imageHeight);
+		for($i=0;$i<count($spriteNames);$i++) {
+			$newSprite = new Sprite;
+			$newSprite->imageResource = $chunkImages[$i];
+			$newSprite->width = imagesx($newSprite->imageResource);
+			$newSprite->height = imagesy($newSprite->imageResource);
+			$spriteGroup->addSprite($newSprite, $spriteNames[$i]);
+		}
+		return $spriteGroup;
+	}
+	
 	/**
 	 * detectCollision()
 	 **
