@@ -34,6 +34,7 @@ $isometricController->render(true);
 || loadSpriteFromObject($spriteObject); || Loads a [Sprite] from a [Sprite] object ||
 || loadSpriteFromSprite($spriteId, _$x_, _$y_, _$z_); || Loads a [Sprite] from another [Sprite] ID ||
 || renderImage(_$displayCoords_, _$fileName_); || Renders the entire isometric image ||
+|| loadSpritesFromTiles()$spriteTiles, $spriteNames, $spriteGroup); || Loads a [spriteGroup] from a GIF of tiles ||
 || detectCollision(); || Detects for collisions between sprites.
 || || ||
 || *Reserved* || The following are internal functions ||
@@ -74,6 +75,12 @@ This function renders the entire isometric image.
 || || -1 = all coords ||
 || || 0+ = coords for that Z height ||
 || _$fileName_ _(string)_ || Filename of the output file ||
+
+==== loadSpritesFromTiles($spriteTiles, $spriteNames, $spriteGroup) ====
+This function loads a [spriteGroup] from one GIF file
+|| $spriteTiles || a GIF file containing all the sprites of equal widths, horizontaly. ||
+|| $spriteNames || The corrosponding names for each sprite (used in the group) ||
+|| $spriteGroup || An empty (or maybe not?) [spriteGroup] ||
 
 ==== detectCollision() ====
 This function detects for collisions between multiple sprites on a single tile, returns all the colliding sprites locations.
