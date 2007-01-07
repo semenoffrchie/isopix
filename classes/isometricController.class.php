@@ -1,9 +1,8 @@
 <?php
 /**
- * OnlineTTD
+ * Isopix
  **
- * A project by Peter Corcoran, OnlineTTD aims to recreate the
- * classic game 'Transport Tycoon Deluxe' in a PHP Web-based game.
+ * A project to create an isometric engine in PHP.
  **/
 /**
  * isometricControler.class.php
@@ -60,7 +59,7 @@ class isometricController {
 	 **/
 	function loadSpriteFromImage($spriteImage, $x = null, $y = null, $z = null, $returnObject = false) {
 		$sprite = new Sprite;
-		$sprite->imageResource = imagecreatefromgif($spriteImage);
+		$sprite->imageResource = imagecreatefromstring($spriteImage);
 		$sprite->width = imagesx($sprite->imageResource);
 		$sprite->height = imagesy($sprite->imageResource);
 		if(isset($x)) $sprite->x = $x;
@@ -130,12 +129,12 @@ class isometricController {
 	/**
 	 * loadSpritesFromTiles($spriteTiles, $spriteNames, $spriteGroup)
 	 **
-	 * $spriteTiles: The name of the .gif containing the tiles.
+	 * $spriteTiles: The name of the image file containing the tiles.
 	 * $spriteNames: The names of the sprites.
 	 * $spriteGroup: The group that should be returned.
 	 **/
 	function loadSpritesFromTiles($spriteTiles, $spriteNames, $spriteGroup) {
-		$tileImage = imagecreatefromgif($spriteTiles);
+		$tileImage = imagecreatefromstring($spriteTiles);
 		$imageWidth = imagesx($tileImage);
 		$imageHeight = imagesy($tileImage);
 		$chunkSize = round($imageWidth / count($spriteNames));
@@ -204,8 +203,8 @@ class isometricController {
 				}
 			}
 		}
-		header("Content-Type: image/gif");
-		if($fileName) return imagegif($this->_outputImage, $fileName);
+		header("Content-Type: image/png");
+		if($fileName) return imagepng($this->_outputImage, $fileName);
 		imagepng($this->_outputImage);
 	}
 }

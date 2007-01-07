@@ -1,9 +1,8 @@
 <?php
 /**
- * OnlineTTD
+ * Isopix
  **
- * A project by Peter Corcoran, OnlineTTD aims to recreate the
- * classic game 'Transport Tycoon Deluxe' in a PHP Web-based game.
+ * A project to create an isometric engine in PHP.
  **/
 /**
  * displayCode.class.php
