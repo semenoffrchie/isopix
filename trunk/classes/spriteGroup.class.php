@@ -54,12 +54,24 @@ class spriteGroup {
 	function exportGroup($filename) {
 	  $export = array();
 	  foreach ($this->_sprites as $name => $sprite) {
-	    $export[$name.".png"] = base64(imagepng($sprite->imageResource));
+	    $export[$name.".png"] = base64_encode(imagepng($sprite->imageResource));
 	  }
 	  touch($filename);
 	  $file = fopen($filename, "w");
 	  fwrite($file, "<?php\nfunction getData() {\n  return ".var_export($export), ";\n}\n?>");
 	  fclose($file);
+	}
+  /**
+	 * importGroup($filename)
+	 **
+	 * $filename : The filename to import the group from.
+	 **/
+	function exportGroup($filename) {
+	  require_once($filename);
+	  $imported = array();
+	  foreach (getData() as $name => $sprite) {
+	    $this->_sprites[remove_extension($filename)] = imagecreatefromstring(base64_decode($sprite->imageResource));
+	  }
 	}
 }
 ?>
