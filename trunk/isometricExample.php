@@ -10,6 +10,7 @@ include "classes/Sprite.class.php";
 include "classes/spriteGroup.class.php";
 include "classes/spriteCollection.class.php";
 include "classes/heightMap.class.php";
+include "classes/isometricAnimater.class.php";
 include "classes/isometricController.class.php";
 
 /**
@@ -25,6 +26,7 @@ if(isset($_GET['viewsource'])) {
  * Needed to power the whole script.
  **/
 $isometricController = new isometricController;
+$isometricAnimater = new isometricAnimater;
 
 /**
  * Create the background sprite
@@ -32,7 +34,7 @@ $isometricController = new isometricController;
  * The 'null' means it doesn't have a x,y,z co-ord,
  * The 'true' means just return the Sprite object without adding to final image.
  **/
-$backgroundSprite = $isometricController->loadSpriteFromImage("sprites/bg.gif", null, null, null, true);
+$backgroundSprite = $isometricController->loadSpriteFromImage("sprites/bg.gif", null, null, null, false);
 
 /**
  * Create the slope sprites.
@@ -74,7 +76,7 @@ $isometricController->loadSpriteFromCollection($heightMap);
 /**
  * Build the track.
  **/
-$trackSprite = $isometricController->loadSpriteFromImage("sprites/track.gif", null, null, null, true);
+$trackSprite = $isometricController->loadSpriteFromImage("sprites/track.gif", null, null, null, false);
 $track = new spriteCollection;
 $track->addSprite($trackSprite, array(-1, 1 ,2), array(0, 2 ,2), array(0, 3 ,2), array(1,4,2), array(1,5,1), array(2,6,0), array(2,7,0), array(3,8,0), array(3,9,0), array(4,10,0), array(4,11,0), array(5,12,0), array(5,13,0), array(6,14,0), array(6,15,0), array(7,16,0));
 $isometricController->loadSpriteFromCollection($track);
@@ -100,5 +102,12 @@ $tree = $isometricController->loadSpriteFromImage("sprites/tree.gif", 0, 4, 2);
 /**
  * Render the whole image.
  **/
-$isometricController->renderImage();
+if($_GET['animated'] == false) {
+	$isometricController->renderImage();
+} else {
+	$isometricAnimater->addFrame($isometricController);
+	$tree->x = 3;
+	$isometricAnimater->addFrame($isometricController);
+	$isometricAnimater->renderImage();
+}
 ?>

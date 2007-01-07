@@ -5,7 +5,7 @@
  * A project to create an isometric engine in PHP.
  **/
 /**
- * isometricControler.class.php
+ * isometricController.class.php
  **
  * isometricController is the basic controller for all isometric
  * engine activity, the controller does all the rendering, sprite
@@ -57,7 +57,7 @@ class isometricController {
 	 * $z:           Preload with Z coord.
 	 * Returns the index of the sprite in $->sprites[]
 	 **/
-	function loadSpriteFromImage($spriteImage, $x = null, $y = null, $z = null, $returnObject = false) {
+	function loadSpriteFromImage($spriteImage, $x = null, $y = null, $z = null, $addToImage = true) {
 		$sprite = new Sprite;
 		$sprite->imageResource = $this->loadSpriteImage($spriteImage);
 		$sprite->width = imagesx($sprite->imageResource);
@@ -65,9 +65,8 @@ class isometricController {
 		if(isset($x)) $sprite->x = $x;
 		if(isset($y)) $sprite->y = $y;
 		if(isset($z)) $sprite->z = $z;
-		if($returnObject == false) $this->sprite[] = $sprite;
-		if($returnObject == false) return count($this->sprite) - 1;
-		else                       return $sprite;
+		if($addToImage == true) $this->sprite[] = $sprite;
+		return $sprite;
 	}
 	/**
 	 * loadSpriteFromCollection($spriteCollection)
@@ -104,25 +103,6 @@ class isometricController {
 	function loadSpriteFromObject($spriteObject) {
 		$newSprite = new Sprite;
 		foreach($newSprite->_params as $param) $newSprite->$param = $spriteObject->$param;
-		$this->sprite[] = $newSprite;
-		return count($this->sprite) - 1;
-	}
-	/**
-	 * loadSpriteFromSprite($originalSprite, $x, $y, $z)
-	 **
-	 * $originalSprite: The index of the original sprite.
-	 * $x:              Preload with X coord.
-	 * $y:              Preload with Y coord.
-	 * $z:              Preload with Z coord.
-	 * Returns the index of the sprite in $->sprites[]
-	 **/
-	function loadSpriteFromSprite($spriteId, $x = null, $y = null, $z = null) {
-		if(!isset($this->sprite[$spriteId])) return false;
-		$newSprite = new Sprite;
-		foreach($newSprite->_params as $param) $newSprite->$param = $this->sprite[$spriteId]->$param;
-		if(isset($x)) $newSprite->x = $x;
-		if(isset($y)) $newSprite->y = $y;
-		if(isset($z)) $newSprite->z = $z;
 		$this->sprite[] = $newSprite;
 		return count($this->sprite) - 1;
 	}
@@ -200,13 +180,14 @@ class isometricController {
 		}
 	}
 	/**
-	 * renderImage($displayCoords, $fileName)
+	 * renderImage($displayCoords, $fileName, $outputHeader)
 	 **
 	 * $displayCoords: Display the coords printed on the final image.
 	 * $fileName:      the filename of the output file.
+	 * $outputHeader:  Display the headers.
 	 * Returns nothing.
 	 **/
-	function renderImage($displayCoords = -2, $fileName = 0) {
+	function renderImage($displayCoords = -2, $fileName = 0, $outputHeader = true) {
 		$this->_outputImage = imagecreate(500, 250);
 		imagecolorallocate($this->_outputImage, 255, 255, 255);
 		$black = imagecolorallocate($this->_outputImage, 0, 0, 255);
@@ -229,9 +210,9 @@ class isometricController {
 				}
 			}
 		}
-		header("Content-Type: image/png");
-		if($fileName) return imagepng($this->_outputImage, $fileName);
-		imagepng($this->_outputImage);
+		if($outputHeader) header("Content-Type: image/gif");
+		if($fileName) return imagegif($this->_outputImage, $fileName);
+		imagegif($this->_outputImage);
 	}
 }
 ?>

@@ -33,7 +33,7 @@ $isometricController->render(true);
 || loadSpriteFromGroup($spriteName, $spriteGroup); || Loads a [Sprite] from a [spriteGroup] ||
 || loadSpriteFromObject($spriteObject); || Loads a [Sprite] from a [Sprite] object ||
 || loadSpriteFromSprite($spriteId, _$x_, _$y_, _$z_); || Loads a [Sprite] from another [Sprite] ID ||
-|| renderImage(_$displayCoords_, _$fileName_); || Renders the entire isometric image ||
+|| renderImage(_$displayCoords_, _$fileName_, _$outputHeaders_); || Renders the entire isometric image ||
 || loadSpritesFromTiles()$spriteTiles, $spriteNames, $spriteGroup); || Loads a [spriteGroup] from a GIF of tiles ||
 || detectCollision(); || Detects for collisions between sprites.
 || || ||
@@ -75,6 +75,7 @@ This function renders the entire isometric image.
 || || -1 = all coords ||
 || || 0+ = coords for that Z height ||
 || _$fileName_ _(string)_ || Filename of the output file ||
+|| _$outputHeaders_ _(bool)_ || Should we output headers? (Default: true) ||
 
 ==== loadSpritesFromTiles($spriteTiles, $spriteNames, $spriteGroup) ====
 This function loads a [spriteGroup] from one GIF file
