@@ -2,7 +2,7 @@
 /**
  * Include needed classes.
  * isometricController MUST be loaded last, as it may attempt to load from other classes.
- * Revision 45: It doesn't at this moment, but to remain future proof please load last.
+ * Revision 13: It doesn't at this moment, but to remain future proof please load last.
  *              As in newer revisions it may load from other classes.
  **/
 include "classes/displayCode.class.php";
