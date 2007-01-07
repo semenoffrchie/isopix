@@ -20,6 +20,7 @@
  * OnlineTTD was officaly started at:
  *  1st January 2007 - 08:00pm
  **/
-include "classes/displayCode.class.php";
-new displayCode(__FILE__);
+header("Location: isometricExample.php");
 ?>
+<script>document.location="isometricExample.php";</script>
+Please goto "isometricExample.php"
