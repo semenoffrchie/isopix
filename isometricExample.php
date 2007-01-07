@@ -103,7 +103,10 @@ $tree = $isometricController->loadSpriteFromImage("sprites/tree.gif", 0, 4, 2);
  * Render the whole image.
  **/
 if($_GET['animated'] == false) {
-	$isometricController->renderImage();
+	$isometricController->renderImage(-2, "output.gif", false);
+	$train->url = "javascript:alert('you clicked the train!')";
+	$tree->url = "javascript:alert('you clicked the tree!')";
+	echo $isometricController->createHTMLMap("output.gif");
 } else {
 	$isometricAnimater->addFrame($isometricController);
 	$tree->x = 3;
