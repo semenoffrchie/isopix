@@ -66,7 +66,7 @@ class spriteGroup {
 	 **
 	 * $filename : The filename to import the group from.
 	 **/
-	function exportGroup($filename) {
+	function importGroup($filename) {
 	  require_once($filename);
 	  $imported = array();
 	  foreach (getData() as $name => $sprite) {
