@@ -59,7 +59,7 @@ class isometricController {
 	 **/
 	function loadSpriteFromImage($spriteImage, $x = null, $y = null, $z = null, $returnObject = false) {
 		$sprite = new Sprite;
-		$sprite->imageResource = imagecreatefromstring($spriteImage);
+		$sprite->imageResource = $this->loadSpriteImage($spriteImage);
 		$sprite->width = imagesx($sprite->imageResource);
 		$sprite->height = imagesy($sprite->imageResource);
 		if(isset($x)) $sprite->x = $x;
@@ -134,7 +134,7 @@ class isometricController {
 	 * $spriteGroup: The group that should be returned.
 	 **/
 	function loadSpritesFromTiles($spriteTiles, $spriteNames, $spriteGroup) {
-		$tileImage = imagecreatefromstring($spriteTiles);
+		$tileImage = $this->loadSpriteImage($spriteTiles);
 		$imageWidth = imagesx($tileImage);
 		$imageHeight = imagesy($tileImage);
 		$chunkSize = round($imageWidth / count($spriteNames));
@@ -172,7 +172,33 @@ class isometricController {
 			$locations[] = array($sprite->x, $sprite->y);
 		}
 		return $detections;
-	} 	
+	} 
+	
+	/**
+	 * loadSpriteImage($imagePath);
+	 **
+	 * Loads a sprite image file.
+	 * $imagePath: the path to the image.
+	 **/
+	function loadSpriteImage($imagePath){
+		switch(exif_imagetype($imagePath)) {
+			case IMAGETYPE_GIF:
+				return imagecreatefromgif($imagePath);
+				break;
+			case IMAGETYPE_JPEG:
+				return imagecreatefromjpeg($imagePath);
+				break;
+			case IMAGETYPE_PNG:
+				return imagecreatefrompng($imagePath);
+				break;
+			case IMAGETYPE_WBMP:
+				return imagecreatefromwbmp($imagePath);
+				break;
+			case IMAGETYPE_XBM:
+				return imagecreatefromxbm($imagePath);
+				break;
+		}
+	}
 	/**
 	 * renderImage($displayCoords, $fileName)
 	 **
