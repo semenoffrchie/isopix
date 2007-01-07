@@ -199,7 +199,7 @@ class isometricController {
 			if($sprite->visible) imagecopyresampled($this->_outputImage, $sprite->imageResource, $x, $y, 0, 0, $sprite->width, $sprite->height, $sprite->width, $sprite->height);
 		}
 		if($displayCoords != -2) {
-			foreach ($this->sprite as $sprite) {
+					foreach ($this->sprite as $sprite) {
 		 		$x = ($sprite->y % 2) ? ($sprite->x * $this->blockWidth) + ($this->blockWidth / 2) : ($sprite->x * ($this->blockWidth));
 		 		$y = ($sprite->y * ($this->blockHeight)) - ($sprite->z * $this->blockDepth) + $sprite->z;
 			 	$x = ($x - $sprite->width) + $this->blockWidth;
@@ -213,6 +213,31 @@ class isometricController {
 		if($outputHeader) header("Content-Type: image/gif");
 		if($fileName) return imagegif($this->_outputImage, $fileName);
 		imagegif($this->_outputImage);
+	}
+	function createHTMLMap($imageFile) {
+		$mapID = md5(time().rand(1, 10000));
+		$outputHTML = sprintf("<img src=\"%s\" usemap=\"%s\" border=\"0\" />\n", $imageFile, $mapID);
+		$outputHTML .= sprintf("<map name=\"%s\">\n", $mapID);
+		foreach ($this->sprite as $sprite) {
+			$x = ($sprite->y % 2) ? ($sprite->x * $this->blockWidth) + ($this->blockWidth / 2) : ($sprite->x * ($this->blockWidth));
+			$y = ($sprite->y * ($this->blockHeight)) - $sprite->z;
+		 	$x = ($x - $sprite->width) + $this->blockWidth;
+			$y = ($y - $sprite->height) + $this->blockHeight;
+			$top = $bot = $left = $right = array();
+			$top["x"] = $x + ($this->blockWidth / 2);
+			$top["y"] = $y;
+			$bot["x"] = $x + ($this->blockWidth / 2);
+			$bot["y"] = $y + ($this->blockHeight * 2);
+			$left["x"] = $x;
+			$left["y"] = $y + $this->blockHeight;
+			$right["x"] = $x + $this->blockWidth;
+			$right["y"] = $y + $this->blockHeight;
+			$coords = sprintf("%s,%s,%s,%s,%s,%s,%s,%s",(int) $top['x'],(int) $top['y'],(int) $right['x'],(int) $right['y'],(int) $bot['x'],(int) $bot['y'],(int) $left['x'],(int) $left['y']);
+			if($sprite->url) $outputHTML .= sprintf("<area shape=\"polygon\" coords=\"%s\" href=\"%s\" border=\"1\" />", $coords, $sprite->url);
+		}
+		$outputHTML .= sprintf("</map>");
+		return $outputHTML;
+//<area shape="polygon" coords="19,44,45,11,87,37,82,76,49,98" href="http://www.trees.com/save.html">
 	}
 }
 ?>

@@ -52,12 +52,18 @@ class Sprite {
 	 * Is the sprite visible?
 	 **/
 	var $visible = true;
+ 	/**
+	 * url (string)
+	 **
+	 * The URL to use in the image maps.
+	 **/
+	var $url = "";
 	/**
 	 * _params (array)
 	 **
 	 * A list of all the vars defined in this class,
 	 * Used in :copySprite
 	 **/
-	var $_params = array("imageResource", "width", "height", "x", "y", "z", "visible");
+	var $_params = array("imageResource", "width", "height", "x", "y", "z", "visible", "url");
 }
 ?>

@@ -22,32 +22,7 @@ See 'isometricController' WikiPage.
 || y _(int)_ || The y position of the sprite (blocks). ||
 || z _(int)_ || The z position of the sprite (blocks). ||
 || visible _(bool)_ || Is the sprite visible? ||
+|| url _(string)_ || The URL used in image maps. ||
 || || ||
 || *Reserved* || The following are internal variables ||
 || params _(array)_ || A list of all the vars defined in this class. ||
-
-==== imageResource (mixed) ====
-This contains the image resource for the sprite.
-
-==== width (int) ====
-The width of the sprite (pixels).
-
-==== height (int) ====
-The height of the sprite (pixels).
-
-==== x (int) ====
-The x position of the sprite (blocks).
-
-==== y (int) ====
-The y position of the sprite (blocks).
-
-==== z (int) ====
-The z position of the sprite (blocks).
-
-==== visible (bool) ====
-Is the sprite visible?
-
-==== params (array) ====
-*This variable is reserved for internal use*
-
-A list of all the vars defined in this class.
