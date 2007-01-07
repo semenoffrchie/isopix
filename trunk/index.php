@@ -19,15 +19,6 @@
  **
  * OnlineTTD was officaly started at:
  *  1st January 2007 - 08:00pm
- **
- * The estimated time of release for the first public UNplayable alpha is:
- *  1st January 2007 - 10:00pm
- **
- * The estimated time of release for the first public playable alpha is:
- *  2nd January 2007 - 11:00am
- **
- * The estimated time of v1.0 (final) release is:
- *  1st February 2006 - 11:00am
  **/
 include "classes/displayCode.class.php";
 new displayCode(__FILE__);
