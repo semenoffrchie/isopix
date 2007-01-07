@@ -28,11 +28,9 @@ $isometricController->render(true);
 
 == Class documentation ==
 *Functions defined in this class:*
-|| loadSpriteFromImage($spriteImage, _$x_, _$y_, _$z_, _$returnObject_); || Loads a [Sprite] from an image ||
 || loadSpriteFromCollection($spriteCollection); || Loads a [Sprite] from a [spriteCollection] ||
 || loadSpriteFromGroup($spriteName, $spriteGroup); || Loads a [Sprite] from a [spriteGroup] ||
 || loadSpriteFromObject($spriteObject); || Loads a [Sprite] from a [Sprite] object ||
-|| loadSpriteFromSprite($spriteId, _$x_, _$y_, _$z_); || Loads a [Sprite] from another [Sprite] ID ||
 || renderImage(_$displayCoords_, _$fileName_, _$outputHeaders_); || Renders the entire isometric image ||
 || loadSpritesFromTiles()$spriteTiles, $spriteNames, $spriteGroup); || Loads a [spriteGroup] from a GIF of tiles ||
 || detectCollision(); || Detects for collisions between sprites.
@@ -40,13 +38,13 @@ $isometricController->render(true);
 || *Reserved* || The following are internal functions ||
 || none || none ||
 
-==== loadSpriteFromImage($spriteImage, $x, $y, $z, $returnObject) ====
+==== loadSpriteFromImage($spriteImage, $x, $y, $z, $addToImage) ====
 This function loads a [Sprite] from an image file
 || $spriteImage _(string)_ || The path of the image you wish to load. ||
 || _$x_ _(int)_ || The X position to load the sprite at. ||
 || _$y_ _(int)_ || The Y position to load the sprite at. ||
 || _$z_ _(int)_ || The Z position to load the sprite at. ||
-|| _$returnObject_ _(bool)_ || Should the Sprite object be returned (or the sprite ID) ||
+|| _$addToImage_ _(bool)_ || Should the Sprite object be added to the output image ||
 
 ==== loadSpriteFromCollection($spriteCollection) ====
 This function loads a [Sprite] from a [spriteCollection]
