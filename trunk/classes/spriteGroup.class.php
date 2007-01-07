@@ -46,5 +46,20 @@ class spriteGroup {
 		$function = $function . "sort";
 		return $this->_sprites = $function($this->_sprites);
 	}
+  /**
+	 * exportGroup($filename)
+	 **
+	 * $filename : The filename to export the group to.
+	 **/
+	function exportGroup($filename) {
+	  $export = array();
+	  foreach ($this->_sprites as $name => $sprite) {
+	    $export[$name.".png"] = base64(imagepng($sprite->imageResource));
+	  }
+	  touch($filename);
+	  $file = fopen($filename, "w");
+	  fwrite($file, "<?php\nfunction getData() {\n  return ".var_export($export), ";\n}\n?>");
+	  fclose($file);
+	}
 }
 ?>
