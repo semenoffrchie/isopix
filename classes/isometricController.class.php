@@ -30,6 +30,8 @@ class isometricController {
 	 * This is the depth (z) of the tiles/blocks (in pixels).
 	 **/
 	var $blockDepth = 7.75;
+	var $_xshift = 0;
+	var $_yshift = 0;
 	/**
 	 * sprite (array)
 	 **
@@ -48,6 +50,10 @@ class isometricController {
 	 * An internal var used to store all the loaded IDs.
 	 **/
  	var $_loadedID = array();
+ 	function offsetCamera($x, $y) {
+		$this->_xshift = $x;
+		$this->_yshift = $y;
+	}
 	/**
 	 * loadSpriteFromImage($spriteID, $x, $y)
 	 **
@@ -204,6 +210,8 @@ class isometricController {
 		 		$y = ($sprite->y * ($this->blockHeight)) - ($sprite->z * $this->blockDepth) + $sprite->z;
 			 	$x = ($x - $sprite->width) + $this->blockWidth;
 			 	$y = ($y - $sprite->height) + $this->blockHeight;
+			 	$x = $x + ($this->_xshift * $this->blockWidth);
+			 	$y = $y + ($this->_yshift * ($this->blockHeight * 2));
 			 	if($sprite->z == $displayCoords || $displayCoords == -1) {
 					imagestring($this->_outputImage, 2, ($x + 10), ($y + 9), $sprite->x . "," . $sprite->y, $black);
 					imagestring($this->_outputImage, 2, 0, 22, "x,y", $black);
