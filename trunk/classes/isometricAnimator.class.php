@@ -5,12 +5,12 @@
  * A project to create an isometric engine in PHP.
  **/
 /**
- * isometricAnimater.class.php
+ * isometricAnimator.class.php
  **
- * isometricAnimater controls all the functions to animate the isometricController.
+ * isometricAnimator controls all the functions to animate the isometricController.
  * This class uses a 3rd party class...
  **/
-class isometricAnimater {
+class isometricAnimator {
 	/**
 	 * frames (array)
 	 **
