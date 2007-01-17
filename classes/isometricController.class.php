@@ -201,17 +201,15 @@ class isometricController {
 		$black = imagecolorallocate($this->_outputImage, 0, 0, 255);
 		foreach ($this->sprite as $sprite) {
 		 	$x = ((($width/2) - ($sprite->y * $this->blockWidth / 2) + ($sprite->x * $this->blockWidth / 2) - ($this->blockWidth / 2)) - $sprite->width) + $this->blockWidth;
-		 	$y = ((($height/2) + ($sprite->y * $this->blockHeight) + ($sprite->x * $this->blockHeight) - ($sprite->z * $this->blockDepth))  - $sprite->height) + $this->blockHeight;
+		 	$y = ((0 + ($sprite->y * $this->blockHeight) + ($sprite->x * $this->blockHeight) - ($sprite->z * $this->blockDepth))  - $sprite->height) + $this->blockHeight;
 			if($sprite->visible) imagecopyresampled($this->_outputImage, $sprite->imageResource, $x, $y, 0, 0, $sprite->width, $sprite->height, $sprite->width, $sprite->height);
 		}
 		if($displayCoords != -2) {
-			for ($x=0;$x<300;$x++) {
-			for ($y=0;$y<300;$y++) {
+			for ($x=0;$x<100;$x++) {
+			for ($y=0;$y<100;$y++) {
 			 	$xc = ((($width/2) - ($y * $this->blockWidth / 2) + ($x * $this->blockWidth / 2) - ($this->blockWidth / 2)) - $this->blockWidth) + $this->blockWidth;
-			 	$yc = ((($height/2) + ($y * $this->blockHeight) + ($x * $this->blockHeight)) - $this->blockHeight) + $this->blockHeight;
-			 	if($displayCoords == -1) {
-					imagestring($this->_outputImage, 2, $xc, $yc, $x . "," . $y, $black);
-				}
+			 	$yc = ((0 + ($y * $this->blockHeight) + ($x * $this->blockHeight)) - $this->blockHeight) + $this->blockHeight;
+				imagestring($this->_outputImage, 2, $xc, $yc, $x . "," . $y, $black);
 			}}
 		}
 		if($outputHeader) header("Content-Type: image/gif");
