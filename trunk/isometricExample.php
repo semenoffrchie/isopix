@@ -55,11 +55,11 @@ $myMap = array();
  * This is the actual heightMap
  * You may see it kinda represents the actual map
  **/
-$myMap[] = array(  2,   2,   2,   2,   2,   2);
-$myMap[] = array(  2,   2,   2,   2,   2,   2);
-$myMap[] = array(  2,   2,   2,   2,   2,   2);
-$myMap[] = array($l1, $l1, $l1, $l1, $l1, $l1);
-$myMap[] = array($l0, $l0, $l0, $l0, $l0, $l0);
+$myMap[] = array(  2,   2,   2,   2,   2,   2,2,2,2,2,2,2,2,2,2,2);
+$myMap[] = array(  2,   2,   2,   2,   2,   2,2,2,2,2,2,2,2,2,2,2);
+$myMap[] = array(  2,   2,   2,   2,   2,   2,2,2,2,2,2,2,2,2,2,2);
+$myMap[] = array($l1, $l1, $l1, $l1, $l1, $l1,$l1, $l1, $l1, $l1, $l1, $l1);
+$myMap[] = array($l0, $l0, $l0, $l0, $l0, $l0,$l0, $l0, $l0, $l0, $l0, $l0);
 $heightMap->setHeightMap($myMap);
 
 /**
@@ -87,7 +87,7 @@ $isometricController->loadSpriteFromCollection($track);
  *   y: 10
  *   z: 0
  **/
-$train = $isometricController->loadSpriteFromImage("sprites/train.gif", 4, 10, 0);
+$train = $isometricController->loadSpriteFromImage("sprites/train.gif", 6, 0, 0);
 
 /**
  * Render a toy-town tree.
