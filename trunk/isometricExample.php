@@ -45,7 +45,7 @@ $slopeGroup = $isometricController->loadSpritesFromTiles("sprites/slope.gif", ar
  * Setup the heightMap
  **/
 $heightMap = new heightMap;
-$heightMap->setMapSize(6, 4);
+$heightMap->setMapSize(100,100);
 $heightMap->setMapHeight(0);
 $l1 = array("left", 1);
 $l0 = array("left", 0);
@@ -58,7 +58,7 @@ $myMap = array();
 $myMap[] = array(  2,   2,   2,   2,   2,   2);
 $myMap[] = array(  2,   2,   2,   2,   2,   2);
 $myMap[] = array(  2,   2,   2,   2,   2,   2);
-$myMap[] = array($l1, $l1, $l1, $l1, $l1, $l0);
+$myMap[] = array($l1, $l1, $l1, $l1, $l1, $l1);
 $myMap[] = array($l0, $l0, $l0, $l0, $l0, $l0);
 $heightMap->setHeightMap($myMap);
 
