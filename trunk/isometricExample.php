@@ -45,7 +45,7 @@ $slopeGroup = $isometricController->loadSpritesFromTiles("sprites/slope.gif", ar
  * Setup the heightMap
  **/
 $heightMap = new heightMap;
-$heightMap->setMapSize(18, 18);
+$heightMap->setMapSize(6, 4);
 $heightMap->setMapHeight(0);
 $l1 = array("left", 1);
 $l0 = array("left", 0);
@@ -55,12 +55,11 @@ $myMap = array();
  * This is the actual heightMap
  * You may see it kinda represents the actual map
  **/
-$myMap[] = array(  2,   2,   2,   2,   2,   2,   2, $l1, $l1, $l0);
-$myMap[] = array(  2,   2,   2,   2,   2, $l1, $l1, $l0, $l0);
-$myMap[] = array(  2,   2,   2, $l1, $l1, $l0, $l0);
-$myMap[] = array(  2, $l1, $l1, $l0, $l0);
-$myMap[] = array($l1, $l0, $l0);
-$myMap[] = array($l0);
+$myMap[] = array(  2,   2,   2,   2,   2,   2);
+$myMap[] = array(  2,   2,   2,   2,   2,   2);
+$myMap[] = array(  2,   2,   2,   2,   2,   2);
+$myMap[] = array($l1, $l1, $l1, $l1, $l1, $l0);
+$myMap[] = array($l0, $l0, $l0, $l0, $l0, $l0);
 $heightMap->setHeightMap($myMap);
 
 /**
@@ -76,11 +75,11 @@ $isometricController->loadSpriteFromCollection($heightMap);
 /**
  * Build the track.
  **/
-$trackSprite = $isometricController->loadSpriteFromImage("sprites/track.gif", null, null, null, false);
+/*$trackSprite = $isometricController->loadSpriteFromImage("sprites/track.gif", null, null, null, false);
 $track = new spriteCollection;
 $track->addSprite($trackSprite, array(-1, 1 ,2), array(0, 2 ,2), array(0, 3 ,2), array(1,4,2), array(1,5,1), array(2,6,0), array(2,7,0), array(3,8,0), array(3,9,0), array(4,10,0), array(4,11,0), array(5,12,0), array(5,13,0), array(6,14,0), array(6,15,0), array(7,16,0));
 $isometricController->loadSpriteFromCollection($track);
-
+*/
 /**
  * Render a train.
  * Co-ords:
@@ -106,7 +105,8 @@ if($_GET['animated'] == false) {
 	$isometricController->renderImage(-2, "output.gif", false);
 	$train->url = "javascript:alert('you clicked the train!')";
 	$tree->url = "javascript:alert('you clicked the tree!')";
-	echo $isometricController->createHTMLMap("output.gif");
+//	echo $isometricController->createHTMLMap("output.gif");
+$isometricController->renderImage(0);
 } else {
 	$isometricAnimater->addFrame($isometricController);
 	$tree->x = 3;

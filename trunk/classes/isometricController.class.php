@@ -194,29 +194,25 @@ class isometricController {
 	 * Returns nothing.
 	 **/
 	function renderImage($displayCoords = -2, $fileName = 0, $outputHeader = true) {
-		$this->_outputImage = imagecreate(500, 250);
+		$width = 500;
+		$height = 250;
+		$this->_outputImage = imagecreate($width, $height);
 		imagecolorallocate($this->_outputImage, 255, 255, 255);
 		$black = imagecolorallocate($this->_outputImage, 0, 0, 255);
 		foreach ($this->sprite as $sprite) {
-		 	$x = ($sprite->y % 2) ? ($sprite->x * $this->blockWidth) + ($this->blockWidth / 2) : ($sprite->x * ($this->blockWidth));
-		 	$y = ($sprite->y * ($this->blockHeight)) - ($sprite->z * $this->blockDepth);
-		 	$x = ($x - $sprite->width) + $this->blockWidth;
-		 	$y = ($y - $sprite->height) + $this->blockHeight;
+		 	$x = ((($width/2) - ($sprite->y * $this->blockWidth / 2) + ($sprite->x * $this->blockWidth / 2) - ($this->blockWidth / 2)) - $sprite->width) + $this->blockWidth;
+		 	$y = ((($height/2) + ($sprite->y * $this->blockHeight) + ($sprite->x * $this->blockHeight) - ($sprite->z * $this->blockDepth))  - $sprite->height) + $this->blockHeight;
 			if($sprite->visible) imagecopyresampled($this->_outputImage, $sprite->imageResource, $x, $y, 0, 0, $sprite->width, $sprite->height, $sprite->width, $sprite->height);
 		}
 		if($displayCoords != -2) {
-					foreach ($this->sprite as $sprite) {
-		 		$x = ($sprite->y % 2) ? ($sprite->x * $this->blockWidth) + ($this->blockWidth / 2) : ($sprite->x * ($this->blockWidth));
-		 		$y = ($sprite->y * ($this->blockHeight)) - ($sprite->z * $this->blockDepth) + $sprite->z;
-			 	$x = ($x - $sprite->width) + $this->blockWidth;
-			 	$y = ($y - $sprite->height) + $this->blockHeight;
-			 	$x = $x + ($this->_xshift * $this->blockWidth);
-			 	$y = $y + ($this->_yshift * ($this->blockHeight * 2));
-			 	if($sprite->z == $displayCoords || $displayCoords == -1) {
-					imagestring($this->_outputImage, 2, ($x + 10), ($y + 9), $sprite->x . "," . $sprite->y, $black);
-					imagestring($this->_outputImage, 2, 0, 22, "x,y", $black);
+			for ($x=0;$x<300;$x++) {
+			for ($y=0;$y<300;$y++) {
+			 	$xc = ((($width/2) - ($y * $this->blockWidth / 2) + ($x * $this->blockWidth / 2) - ($this->blockWidth / 2)) - $this->blockWidth) + $this->blockWidth;
+			 	$yc = ((($height/2) + ($y * $this->blockHeight) + ($x * $this->blockHeight)) - $this->blockHeight) + $this->blockHeight;
+			 	if($displayCoords == -1) {
+					imagestring($this->_outputImage, 2, $xc, $yc, $x . "," . $y, $black);
 				}
-			}
+			}}
 		}
 		if($outputHeader) header("Content-Type: image/gif");
 		if($fileName) return imagegif($this->_outputImage, $fileName);
