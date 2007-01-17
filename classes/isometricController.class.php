@@ -209,7 +209,7 @@ class isometricController {
 			for ($y=0;$y<100;$y++) {
 			 	$xc = ((($width/2) - ($y * $this->blockWidth / 2) + ($x * $this->blockWidth / 2) - ($this->blockWidth / 2)) - $this->blockWidth) + $this->blockWidth;
 			 	$yc = ((0 + ($y * $this->blockHeight) + ($x * $this->blockHeight)) - $this->blockHeight) + $this->blockHeight;
-				imagestring($this->_outputImage, 2, $xc, $yc, $x . "," . $y, $black);
+				imagestring($this->_outputImage, 2, $xc+15, $yc-10, $x . "," . $y, $black);
 			}}
 		}
 		if($outputHeader) header("Content-Type: image/gif");
