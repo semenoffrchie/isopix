@@ -17,13 +17,13 @@ class isometricController {
 	 **
 	 * This is the width (z) of the tiles/blocks (in pixels).
 	 **/
-	var $blockWidth = 64;
+	var $blockWidth = 68;
 	/**
 	 * blockHeight (int)
 	 **
 	 * This is the height/2 (y) of the tiles/blocks (in pixels).
 	 **/
-	var $blockHeight = 15.5;
+	var $blockHeight = 17;
 	/**
 	 * blockDepth (int)
 	 **
@@ -196,25 +196,25 @@ class isometricController {
 	function renderImage($displayCoords = -2, $fileName = 0, $outputHeader = true) {
 		$width = 500;
 		$height = 250;
-		$this->_outputImage = imagecreate($width, $height);
-		imagecolorallocate($this->_outputImage, 255, 255, 255);
+		$this->_outputImage = imagecreatetruecolor($width, $height);
+		imagerectangle($this->_outputImage,0,0,$width,$height, imagecolorallocate($this->_outputImage, 255,255,255));
 		$black = imagecolorallocate($this->_outputImage, 0, 0, 255);
 		foreach ($this->sprite as $sprite) {
 		 	$x = ((($width/2) - ($sprite->y * $this->blockWidth / 2) + ($sprite->x * $this->blockWidth / 2) - ($this->blockWidth / 2)) - $sprite->width) + $this->blockWidth;
-		 	$y = ((0 + ($sprite->y * $this->blockHeight) + ($sprite->x * $this->blockHeight) - ($sprite->z * $this->blockDepth))  - $sprite->height) + $this->blockHeight;
+		 	$y = ((50 + ($sprite->y * $this->blockHeight) + ($sprite->x * $this->blockHeight) - ($sprite->z * $this->blockDepth))  - $sprite->height) + $this->blockHeight;
 			if($sprite->visible) imagecopyresampled($this->_outputImage, $sprite->imageResource, $x, $y, 0, 0, $sprite->width, $sprite->height, $sprite->width, $sprite->height);
 		}
 		if($displayCoords != -2) {
 			for ($x=0;$x<100;$x++) {
 			for ($y=0;$y<100;$y++) {
 			 	$xc = ((($width/2) - ($y * $this->blockWidth / 2) + ($x * $this->blockWidth / 2) - ($this->blockWidth / 2)) - $this->blockWidth) + $this->blockWidth;
-			 	$yc = ((0 + ($y * $this->blockHeight) + ($x * $this->blockHeight)) - $this->blockHeight) + $this->blockHeight;
+			 	$yc = ((50 + ($y * $this->blockHeight) + ($x * $this->blockHeight)) - $this->blockHeight) + $this->blockHeight;
 				imagestring($this->_outputImage, 2, $xc+15, $yc-10, $x . "," . $y, $black);
 			}}
 		}
-		if($outputHeader) header("Content-Type: image/gif");
-		if($fileName) return imagegif($this->_outputImage, $fileName);
-		imagegif($this->_outputImage);
+		if($outputHeader) header("Content-Type: image/png");
+		if($fileName) return imagepng($this->_outputImage, $fileName);
+		imagepng($this->_outputImage);
 	}
 	function createHTMLMap($imageFile) {
 		$mapID = md5(time().rand(1, 10000));
