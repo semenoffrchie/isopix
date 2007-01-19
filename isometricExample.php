@@ -40,7 +40,7 @@ $backgroundSprite = $isometricController->loadSpriteFromImage("sprites/tile_8.pn
  * Setup the heightMap
  **/
 $heightMap = new heightMap;
-$heightMap->setMapSize(5,5);
+$heightMap->setMapSize(10,10);
 $heightMap->setMapHeight(0);
 $myMap = array();
 
