@@ -30,6 +30,8 @@ class isometricController {
 	 * This is the depth (z) of the tiles/blocks (in pixels).
 	 **/
 	var $blockDepth = 7.75;
+	var $mapWidth = 800;
+	var $mapHeight = 400;
 	var $_xshift = 0;
 	var $_yshift = 0;
 	/**
@@ -194,14 +196,14 @@ class isometricController {
 	 * Returns nothing.
 	 **/
 	function renderImage($displayCoords = -2, $fileName = 0, $outputHeader = true) {
-		$width = 500;
-		$height = 250;
+		$width = $this->mapWidth;
+		$height = $this->mapHeight;
 		$this->_outputImage = imagecreatetruecolor($width, $height);
 		imagerectangle($this->_outputImage,0,0,$width,$height, imagecolorallocate($this->_outputImage, 255,255,255));
 		$black = imagecolorallocate($this->_outputImage, 0, 0,0);
 		foreach ($this->sprite as $sprite) {
-		 	$x = ((($width/2) - ($sprite->y * $this->blockWidth / 2) + ($sprite->x * $this->blockWidth / 2) - ($this->blockWidth / 2)) - $sprite->width) + $this->blockWidth;
-		 	$y = ((50 + ($sprite->y * $this->blockHeight) + ($sprite->x * $this->blockHeight) - ($sprite->z * $this->blockDepth))  - $sprite->height) + $this->blockHeight;
+		 	$x = $width/2+((0 - ($sprite->y * $this->blockWidth / 2) + ($sprite->x * $this->blockWidth / 2) - ($this->blockWidth / 2)) - $sprite->width) + ($this->blockWidth*1.5);
+		 	$y = ((0 + ($sprite->y * $this->blockHeight) + ($sprite->x * $this->blockHeight) - ($sprite->z * $this->blockDepth))  - $sprite->height) + ($this->blockHeight*4);
 			if($sprite->visible) imagecopyresampled($this->_outputImage, $sprite->imageResource, $x, $y, 0, 0, $sprite->width, $sprite->height, $sprite->width, $sprite->height);
 		}
 		if($displayCoords != -2) {
