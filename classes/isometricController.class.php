@@ -198,7 +198,7 @@ class isometricController {
 		$height = 250;
 		$this->_outputImage = imagecreatetruecolor($width, $height);
 		imagerectangle($this->_outputImage,0,0,$width,$height, imagecolorallocate($this->_outputImage, 255,255,255));
-		$black = imagecolorallocate($this->_outputImage, 0, 0, 255);
+		$black = imagecolorallocate($this->_outputImage, 0, 0,0);
 		foreach ($this->sprite as $sprite) {
 		 	$x = ((($width/2) - ($sprite->y * $this->blockWidth / 2) + ($sprite->x * $this->blockWidth / 2) - ($this->blockWidth / 2)) - $sprite->width) + $this->blockWidth;
 		 	$y = ((50 + ($sprite->y * $this->blockHeight) + ($sprite->x * $this->blockHeight) - ($sprite->z * $this->blockDepth))  - $sprite->height) + $this->blockHeight;
@@ -209,7 +209,7 @@ class isometricController {
 			for ($y=0;$y<100;$y++) {
 			 	$xc = ((($width/2) - ($y * $this->blockWidth / 2) + ($x * $this->blockWidth / 2) - ($this->blockWidth / 2)) - $this->blockWidth) + $this->blockWidth;
 			 	$yc = ((50 + ($y * $this->blockHeight) + ($x * $this->blockHeight)) - $this->blockHeight) + $this->blockHeight;
-				imagestring($this->_outputImage, 2, $xc+15, $yc-10, $x . "," . $y, $black);
+				imagestring($this->_outputImage, 4, $xc+15, $yc-10, $x . "," . $y, $black);
 			}}
 		}
 		if($outputHeader) header("Content-Type: image/png");
