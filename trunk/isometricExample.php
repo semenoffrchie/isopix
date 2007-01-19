@@ -10,7 +10,7 @@ include "classes/Sprite.class.php";
 include "classes/spriteGroup.class.php";
 include "classes/spriteCollection.class.php";
 include "classes/heightMap.class.php";
-include "classes/isometricAnimater.class.php";
+include "classes/isometricAnimator.class.php";
 include "classes/isometricController.class.php";
 
 /**
@@ -26,7 +26,7 @@ if(isset($_GET['viewsource'])) {
  * Needed to power the whole script.
  **/
 $isometricController = new isometricController;
-$isometricAnimater = new isometricAnimater;
+$isometricAnimator = new isometricAnimator;
 
 /**
  * Create the background sprite
@@ -84,5 +84,5 @@ tile_31.png//tree*/
 /**
  * Render the whole image.
  **/
-$isometricController->renderImage();
+$isometricController->renderImage(-1);
 ?>
