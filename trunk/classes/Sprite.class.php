@@ -16,6 +16,7 @@ class Sprite {
 	 * This contains the resource for the sprite image.
 	 **/
 	var $imageResource = null;
+	var $type = 0;
  	/**
 	 * width (int)
 	 **
